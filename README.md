@@ -1,10 +1,12 @@
-# AutoApiSecret
+# AutoApiSecret-加密版
+AutoApi系列：AutoApi、AutoApiSecret、AutoApiSR、AutoApiS
 
 # 置顶 #
 * 本项目是建立在[原教程](https://blog.432100.xyz/index.php/archives/50/)可以正确调用api的**假设**上的，核心是paran/黑幕大佬的py脚本。
-* 本项目只是提供一个自动、免费、无需额外设备的脚本运行方式，换句话说，**就是一台机子**。（因为原教程需要服务器/超长时间运转的设备，大部分人都不具备，本项目应运而生）
+* 本项目只是提供一个自动、免费、无需额外设备的脚本运行方式，换句话说，**借用github的电脑/服务器来干活**。（因为原教程需要服务器/超长时间运转的设备，大部分人都不具备，本项目应运而生）
+* 本项目运行依赖**github action**服务，此功能github固有而**非私人提供**的服务器，且整个运行过程只涉及你与github。
 * 请务必先阅读理解[原教程](https://blog.432100.xyz/index.php/archives/50/)的**原理说明、设计理念**。
-* 搬运[原教程](https://blog.432100.xyz/index.php/archives/50/)说法：**不保证一定能续期！不保证一定能续期！不保证一定能续期**！或者说，**只是增大续订可能性**。(据我了解，E5续订一般在最后20天左右发通知)
+* **不保证一定能续期！不保证一定能续期！不保证一定能续期**！或者说，**只是增大续订可能性**。过期前、后30天都可能续期！！！
 * 若理解并接受上述说明，请接着操作；**若否，请点击浏览器右上角 X 。**
 
 ### 项目说明 ###
@@ -15,27 +17,51 @@
 ### 特别说明/Thanks ###
 * 原教程博主-黑幕（酷安id-Paran）：https://blog.432100.xyz/index.php/archives/50/
 * 普通版地址：https://github.com/wangziyingwen/AutoApi
-* 加密版地址：https://github.com/wangziyingwen/AutoApiSecret
-* 更新日志：https://github.com/wangziyingwen/Autoapi-test
+* 加密版地址（推荐）：https://github.com/wangziyingwen/AutoApiSecret
+* 模仿人为应用开发版（包含升级步骤）：https://github.com/wangziyingwen/AutoApiSR
+* 超级版地址： https://github.com/wangziyingwen/AutoApiS
+* **常见错误及解决办法/更新日志**：https://github.com/wangziyingwen/Autoapi-test
 * 网页获取refresh_token小工具（不建议使用）：https://github.com/wangziyingwen/GetAutoApiToken
-* 视频教程：（我操作很慢，自行快进）
+* 视频教程：（我操作很慢，自行倍速/快进）
    * 在线/下载地址：https://kino-onemanager.herokuapp.com/Video/AutoApi%E6%95%99%E7%A8%8B.mp4?preview
    * B站：https://www.bilibili.com/video/av95688306/
+
            
 
 ### 区别 ###
-   项目用的是公共仓库（开放代码），所有人都能看到你的代码内容。
+   [普通版（弃用）](https://github.com/wangziyingwen/AutoApi)：密钥暴露，不在乎的话可以使用
+   
+   [加密版（推荐）](https://github.com/wangziyingwen/AutoApiSecret)：应用id机密加密隐藏，提高安全性
 
-   所以你的应用id、机密、令牌都会显示出来，不安全。
-
-   加密版，我把应用id、机密都隐藏了，令牌因为需要实时更新，隐藏不了（我不会！），安全性会高很多！
+   [模仿人为应用开发版（半弃用）](https://github.com/wangziyingwen/AutoApiSR)：顾名思义，加密版的升级版。由于超级版兼容模拟版的功能，此版本处于一种尴尬位置。（当然也可以正常使用）
+   
+   [超级版（不建议）](https://github.com/wangziyingwen/AutoApiS)：进一步升级版，增加自定义参数、模式。按目前情况，微软续订要求很低，暂时不需要使用此项目。
+   
+   **以上推荐/不建议等只是个人意见，请自行选择版本，可同时使用**。
 
 --------------------------------------------------------------
 
-### 步骤 ###
+## 步骤 ##  
+
+   >:blush: :blush: :blush: :blush: :blush: :blush: 
+   
+   >请注意！请注意！请注意！
+   
+   >*** **有错误/问题请看**:    [常见错误及解决办法/更新日志](https://github.com/wangziyingwen/Autoapi-test)
+   
+   >*** 原教程/博客好像也坏了，看[视频教程](https://www.bilibili.com/video/av95688306/)吧，懒得补充，ORZ. （或者去网上搜一下，有一堆转载，关键词：github action e5 续期）
+   
+   >*** 注册应用时用到的[azure管理页面](https://portal.azure.com/)，或者直接到[仪表板](https://aad.portal.azure.com/)，找到注册应用选项
+   
+   >***【重定向URI】填写的内容：http://localhost:53682/
+
+   >*** rclone下载，请自行百度谷歌，官网好像是[rclone.org](https://rclone.org)
+   
+   >:anguished: :anguished: :anguished: :anguished: :anguished: :anguished:  
+  
 * 第一步，先大致浏览[原教程](https://blog.432100.xyz/index.php/archives/50/)，了解如何获取应用id、机密、refresh_token 3样东西，以方便接下来的操作。
 
-* 第二步，登陆/新建github账号，回到本项目页面，点击右上角fork本项目的代码到你自己的账号，然后你账号下会出现一个一模一样的项目，接下来的操作均在你的这个项目下进行。
+* 第二步，登陆/新建github账号，回到本项目页面，点击右上角fork本项目的代码到你自己的账号，然后你账号下会出现一个一模一样的项目，接下来的操作均在你的这个项目下进行。（看不到图片/图裂请科学上网）
 
   ![image](https://github.com/wangziyingwen/ImageHosting/blob/master/AutoApi/fork.png)
   
@@ -82,11 +108,13 @@
 
   ![image](https://github.com/wangziyingwen/ImageHosting/blob/master/AutoApi/日志.png)
 
-* 第六步，没出错的话，就搞定啦！！再看看下面的定时次数要不要修改，不打算改就不用管了。
+* 第六步，没出错的话，就搞定啦！！再看看下面的定时次数要不要修改，不打算改就忽略。
 
+  **然后第二天回来确认下是否自动运行了（ation里是否多出来几个）**,是的话就不用管了，完结。
+  
   我设定的每6小时自动运行一次，每次调用3轮（点击右上角星星/star也可以立马调用一次），你们自行斟酌修改（我也不知道保持活跃要调用多少次、多久）：
 
-  * 定时自动启动修改地方：（在.github/workflow/autoapi.yml文件里，自行百度cron定时任务格式）
+  * 定时自动启动修改地方：（在.github/workflow/AutoApiSecret.yml文件里，自行百度cron定时任务格式，最短每5分钟一次）
    
   ![image](https://github.com/wangziyingwen/ImageHosting/blob/master/AutoApi/定时.png)
    
@@ -122,7 +150,7 @@
   代码小白，多包涵！有问题/修改建议可以点击上方issues发布一下，或者PY给我:
   wz.lxh@outlook.com
   
-  建了个Q群：657581700，不过没人
+  Q群：[657581700](https://jq.qq.com/?_wv=1027&k=5FQJbWmV)  （项目相关讨论）
   
   最后的最后，再次感谢黑幕/paran大佬
   
