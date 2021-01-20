@@ -50,13 +50,14 @@ jobs:
           rm -f configkey.txt
       - name: Commit #上传新的refresh_token到仓库
         run: |
-          git config --global user.email 1844766234@qq.com
-          git config --global user.name RC1844
-          git pull
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add .
-          git commit -m "update new refresh_token" -a
+          git commit -m "$(date "+%Y-%m-%d %H:%M:%S")" -a
+
       - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+        run: git push
+        # uses: ad-m/github-push-action@master
+        # with:
+        #   github_token: ${{ secrets.GITHUB_TOKEN }}
+        #   branch: main
